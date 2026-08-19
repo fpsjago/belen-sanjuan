@@ -8,8 +8,8 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   output: 'static',
-  site: 'https://colegiobelensanjuan.vercel.app',
-  base: '/',
+  site: 'https://fpsjago.github.io',
+  base: '/belen-sanjuan',
   compressHTML: true,
   integrations: [react(), sitemap()],
   build: { assets: '_assets' },
