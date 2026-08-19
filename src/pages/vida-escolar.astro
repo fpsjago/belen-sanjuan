@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader';
+import VidaCuerpo from '../components/VidaCuerpo';
+import CTABand from '../components/CTABand';
+import { optimized } from '../lib/images';
+import type { ClauseDef } from '../types';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const eventosRaw = await getCollection('eventos');
+const eventos = eventosRaw.map((e) => e.data).sort((a, b) => a.orden - b.orden);
+
+const [mundial, cancha, comunidad, virutas, libros] = await Promise.all([
+  optimized('mundial.jpg', 'Estudiantes de todos los niveles en el Mundial Belén Sanjuán', 1100),
+  optimized('cancha.jpg', 'Estudiantes en la cancha techada del colegio', 700),
+  optimized('comunidad.jpg', 'Maestra y estudiante de maternal sonriendo', 700),
+  optimized('lapices-virutas.jpg', 'Virutas de colores y lápices en el taller de arte', 700),
+  optimized('libros-pila.jpg', 'Libros antiguos apilados con luz cálida', 700),
+]);
+
+const clauses: ClauseDef[] = [
+  { numeral: 'I', id: 'pilares', label: 'Cuatro maneras de crecer' },
+  { numeral: 'II', id: 'anio', label: 'El año Belén Sanjuán' },
+  { numeral: 'III', id: 'galeria', label: 'Galería' },
+];
+---
+
+<BaseLayout
+  title="Vida Escolar — Deportes, Fe, Arte y Obra Social | U.E.P. Belén Sanjuán"
+  description="Del Mundial Belén Sanjuán a las misas y las jornadas de donación: la vida entre clases también educa. Deportes, pastoral, arte y tradiciones venezolanas."
+  clauses={clauses}
+>
+  <PageHeader
+    kicker="VIDA ESCOLAR"
+    titulo="Lo que se aprende"
+    tituloEm="fuera del pizarrón."
+    intro="El deporte, la fe, el arte y el servicio no son extracurriculares en el Belén Sanjuán: son parte del proyecto. Esto es lo que vive un estudiante en un año."
+    client:load
+  />
+  <VidaCuerpo
+    base={base}
+    mundial={mundial}
+    cancha={cancha}
+    comunidad={comunidad}
+    virutas={virutas}
+    libros={libros}
+    eventos={eventos}
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+  <CTABand
+    base={base}
+    titulo="La mejor forma de sentirlo"
+    tituloEm="es visitarlo."
+    ctaLabel="AGENDA UNA VISITA"
+    ctaHref="admisiones/"
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+</BaseLayout>

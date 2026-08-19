@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader';
+import NivelDeep from '../components/NivelDeep';
+import CTABand from '../components/CTABand';
+import { optimized } from '../lib/images';
+import type { ClauseDef, NivelData, OptimizedImage } from '../types';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const raw = await getCollection('niveles');
+const niveles: NivelData[] = raw
+  .map((n) => ({ ...n.data, imagen: undefined }))
+  .sort((a, b) => a.orden - b.orden);
+
+const ALTS: Record<string, string> = {
+  'comunidad.jpg': 'Docente de maternal con un estudiante en brazos, ambos sonriendo',
+  'cancha.jpg': 'Estudiantes en la cancha techada durante educación física',
+  'mundial.jpg': 'Estudiantes de secundaria liderando el Mundial Belén Sanjuán',
+};
+
+const imagenes: OptimizedImage[] = await Promise.all(
+  raw
+    .sort((a, b) => a.data.orden - b.data.orden)
+    .map((n) => optimized(n.data.imagen, ALTS[n.data.imagen] ?? n.data.imagenCaption, 900)),
+);
+
+const ANCHORS = ['maternal', 'primaria', 'secundaria'];
+const ACCENTS = ['gold', 'navy', 'folio'] as const;
+
+const clauses: ClauseDef[] = niveles.map((n, i) => ({
+  numeral: n.numeral,
+  id: ANCHORS[i],
+  label: n.nombre,
+}));
+---
+
+<BaseLayout
+  title="Niveles — Maternal, Primaria y Secundaria | U.E.P. Belén Sanjuán"
+  description="Dieciséis años de crecimiento en un solo colegio: maternal (1-5), primaria (6-11) y secundaria (12-17) con educación integral en Caracas."
+  clauses={clauses}
+>
+  <PageHeader
+    kicker="NUESTROS NIVELES"
+    titulo="Dieciséis años de crecimiento,"
+    tituloEm="un solo colegio."
+    intro="Cada nivel tiene su propio equipo docente, sus espacios y su ritmo. Pero comparten un mismo proyecto: la educación integral. Aquí nadie empieza de cero al cambiar de etapa."
+    client:load
+  />
+
+  {
+    niveles.map((n, i) => (
+      <NivelDeep
+        nivel={n}
+        imagen={imagenes[i]}
+        flip={i % 2 === 1}
+        accent={ACCENTS[i]}
+        anchorId={ANCHORS[i]}
+        client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+      />
+    ))
+  }
+
+  <CTABand
+    base={base}
+    titulo="¿En qué etapa está tu hijo?"
+    tituloEm="Ven a conocer su próximo salón."
+    ctaLabel="AGENDA UNA VISITA"
+    ctaHref="admisiones/"
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+</BaseLayout>

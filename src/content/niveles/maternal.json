@@ -1,0 +1,15 @@
+{
+  "orden": 1, "numeral": "I", "nombre": "Maternal y Preescolar", "edades": "1 – 5 AÑOS",
+  "lema": "Jugar es la primera forma de aprender.",
+  "descripcion": "Los primeros años deciden cómo un niño se relaciona con aprender. Por eso nuestro maternal no es una guardería que cuida: es un aula que juega. Ambientes seguros, docentes especializadas y adaptación acompañada para la primera separación de casa.",
+  "bullets": ["Estimulación temprana y psicomotricidad", "Iniciación a la lectura por proyectos", "Docentes especializadas por edad", "Reporte diario a los representantes"],
+  "horario": "7:30 – 12:30", "horarioNota": "Tarde extendida opcional [confirmar hora]",
+  "diaTipico": [
+    {"hora": "7:30", "actividad": "Recibimiento"},
+    {"hora": "8:00", "actividad": "Círculo de la mañana"},
+    {"hora": "9:30", "actividad": "Proyecto y juego"},
+    {"hora": "11:00", "actividad": "Parque y merienda"},
+    {"hora": "12:30", "actividad": "Salida o tarde completa"}
+  ],
+  "imagen": "comunidad.jpg", "imagenCaption": "ADAPTACIÓN ACOMPAÑADA", "imagenPendiente": false
+}

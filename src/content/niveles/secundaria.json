@@ -1,0 +1,15 @@
+{
+  "orden": 3, "numeral": "III", "nombre": "Secundaria", "edades": "12 – 17 AÑOS",
+  "lema": "Rumbo propio, con acompañamiento.",
+  "descripcion": "Cinco años de bachillerato con un objetivo claro: que cada estudiante se gradúe sabiendo quién es y qué quiere estudiar. Orientación vocacional desde tercer año y proyecto de grado con tutoría personal.",
+  "bullets": ["Bachillerato en ciencias con laboratorios", "Proyecto de grado con tutoría personal", "Preparación para pruebas de admisión universitaria", "Liderazgo estudiantil y obra social"],
+  "horario": "7:00 – 1:40", "horarioNota": "Laboratorios y proyecto de grado según año",
+  "diaTipico": [
+    {"hora": "7:00", "actividad": "Entrada"},
+    {"hora": "7:20", "actividad": "Bloques por asignatura"},
+    {"hora": "10:20", "actividad": "Receso"},
+    {"hora": "10:50", "actividad": "Laboratorios y electivas"},
+    {"hora": "1:40", "actividad": "Salida · actividades y proyecto de grado"}
+  ],
+  "imagen": "mundial.jpg", "imagenCaption": "MUNDIAL BSJ · LIDERAZGO ESTUDIANTIL", "imagenPendiente": false
+}

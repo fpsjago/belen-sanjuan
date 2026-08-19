@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader';
+import ProyectoCuerpo from '../components/ProyectoCuerpo';
+import CTABand from '../components/CTABand';
+import { optimized } from '../lib/images';
+import type { ClauseDef } from '../types';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const [libros, cuaderno] = await Promise.all([
+  optimized('libros-pila.jpg', 'Libros antiguos con cantos marmolados apilados a contraluz', 800),
+  optimized('cuaderno-mesa.jpg', 'Cuaderno abierto en blanco sobre una mesa de madera', 800),
+]);
+
+const clauses: ClauseDef[] = [
+  { numeral: 'I', id: 'maestra', label: 'La maestra Belén Sanjuán' },
+  { numeral: 'II', id: 'pilares', label: 'Los cuatro pilares' },
+  { numeral: 'III', id: 'aula', label: 'En el aula' },
+];
+---
+
+<BaseLayout
+  title="Proyecto Educativo — Educación Integral | U.E.P. Belén Sanjuán"
+  description="El proyecto educativo del Colegio Belén Sanjuán: la educación integral de la maestra Belén Sanjuán aplicada todos los días. Mente, cuerpo, carácter y fe."
+  clauses={clauses}
+>
+  <PageHeader
+    kicker="PROYECTO EDUCATIVO"
+    titulo="Formar la mente, el cuerpo,"
+    tituloEm="el carácter y la fe."
+    intro="Nuestro proyecto tiene nombre propio: el de la maestra Belén Sanjuán, pionera de la educación integral venezolana. Esto es lo que su legado significa en nuestras aulas."
+    client:load
+  />
+  <ProyectoCuerpo
+    base={base}
+    libros={libros}
+    cuaderno={cuaderno}
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+  <CTABand
+    base={base}
+    titulo="Un proyecto se entiende mejor"
+    tituloEm="viéndolo en acción."
+    ctaLabel="AGENDA UNA VISITA"
+    ctaHref="admisiones/"
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+</BaseLayout>

@@ -1,0 +1,15 @@
+{
+  "orden": 2, "numeral": "II", "nombre": "Primaria", "edades": "6 – 11 AÑOS",
+  "lema": "Bases firmes y el hábito de preguntar.",
+  "descripcion": "Seis años para construir las bases: leer con gusto, razonar con números, preguntar sin miedo. Grupos por grado con docente guía y especialistas por área desde cuarto grado.",
+  "bullets": ["Lengua, matemática y ciencias con seguimiento individual", "Inglés desde primer grado", "Deporte y música dentro del horario", "Proyectos por lapso con muestra a las familias"],
+  "horario": "7:00 – 1:00", "horarioNota": "Actividades deportivas y tareas dirigidas en la tarde",
+  "diaTipico": [
+    {"hora": "7:00", "actividad": "Entrada y acto cívico"},
+    {"hora": "7:30", "actividad": "Bloques académicos"},
+    {"hora": "10:00", "actividad": "Receso y merienda"},
+    {"hora": "10:30", "actividad": "Especialistas: inglés, música, deporte"},
+    {"hora": "1:00", "actividad": "Salida o tareas dirigidas"}
+  ],
+  "imagen": "cancha.jpg", "imagenCaption": "EDUCACIÓN FÍSICA · CANCHA TECHADA", "imagenPendiente": false
+}

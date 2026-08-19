@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader';
+import ContactoCuerpo from '../components/ContactoCuerpo';
+import { WHATSAPP_HREF } from '../lib/site';
+import type { ClauseDef } from '../types';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const clauses: ClauseDef[] = [
+  { numeral: 'I', id: 'contacto', label: 'Escríbenos' },
+  { numeral: 'II', id: 'familias', label: 'Familias' },
+];
+---
+
+<BaseLayout
+  title="Contacto | U.E.P. Belén Sanjuán — Caracas"
+  description="Escríbele al Colegio Belén Sanjuán en Caracas: WhatsApp de admisiones, formulario de contacto, horario de atención y accesos para familias."
+  clauses={clauses}
+>
+  <PageHeader
+    kicker="CONTACTO Y FAMILIAS"
+    titulo="Hablemos:"
+    tituloEm="las puertas están abiertas."
+    intro="Respuesta el mismo día hábil por WhatsApp. Y si prefieres conversar en persona, agenda tu visita. El cafecito lo ponemos nosotros."
+    client:load
+  />
+  <ContactoCuerpo
+    base={base}
+    whatsappHref={WHATSAPP_HREF}
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+</BaseLayout>

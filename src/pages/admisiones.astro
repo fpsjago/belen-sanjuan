@@ -1,0 +1,42 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader';
+import AdmisionesCuerpo from '../components/AdmisionesCuerpo';
+import { WHATSAPP_HREF } from '../lib/site';
+import type { ClauseDef } from '../types';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const faqsRaw = await getCollection('faqs');
+const faqs = faqsRaw.map((f) => f.data).sort((a, b) => a.orden - b.orden);
+
+const clauses: ClauseDef[] = [
+  { numeral: 'I', id: 'proceso', label: 'El proceso' },
+  { numeral: 'II', id: 'recaudos', label: 'Recaudos' },
+  { numeral: 'III', id: 'fechas', label: 'Fechas e inversión' },
+  { numeral: 'IV', id: 'preguntas', label: 'Preguntas frecuentes' },
+];
+---
+
+<BaseLayout
+  title="Admisiones 2026–2027 | U.E.P. Belén Sanjuán"
+  description="Proceso de admisión del Colegio Belén Sanjuán en Caracas: visita guiada, recaudos por nivel, fechas clave y respuesta el mismo día por WhatsApp."
+  clauses={clauses}
+  navTone="light"
+>
+  <PageHeader
+    tone="navy"
+    kicker="ADMISIONES · AÑO ESCOLAR 2026–2027"
+    titulo="Formar parte empieza"
+    tituloEm="con una conversación."
+    intro="Sin procesos fríos ni planillas interminables. Conócenos primero: el resto acompaña solo. Cupos limitados por grado."
+    client:load
+  />
+  <AdmisionesCuerpo
+    base={base}
+    faqs={faqs}
+    whatsappHref={WHATSAPP_HREF}
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+</BaseLayout>

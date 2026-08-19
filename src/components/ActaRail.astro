@@ -1,0 +1,27 @@
+---
+/**
+ * Fixed roman-numeral clause rail — the acta's index.
+ * Pure .astro (page chrome, no React needed). animations.ts drives active state.
+ */
+import type { ClauseDef } from '../types';
+
+interface Props {
+  clauses: ClauseDef[];
+}
+const { clauses } = Astro.props;
+---
+
+{
+  clauses.length > 0 && (
+    <nav class="acta-rail" aria-label="Índice de secciones">
+      {clauses.map((c, i) => (
+        <>
+          {i > 0 && <span class="rail-line" aria-hidden="true" />}
+          <a href={`#${c.id}`} data-rail-target={c.id} aria-label={c.label}>
+            {c.numeral}
+          </a>
+        </>
+      ))}
+    </nav>
+  )
+}

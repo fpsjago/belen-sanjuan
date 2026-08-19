@@ -1,0 +1,105 @@
+---
+import { ClientRouter } from 'astro:transitions';
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import Nav from '../components/Nav';
+import Footer from '../components/Footer';
+import ActaRail from '../components/ActaRail.astro';
+import type { ClauseDef } from '../types';
+
+interface Props {
+  title: string;
+  description: string;
+  clauses?: ClauseDef[];
+  navTone?: 'dark' | 'light';
+  ogImage?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  clauses = [],
+  navTone = 'dark',
+  ogImage,
+  noindex = false,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const og = ogImage ?? `${base}og-image.jpg`;
+
+const jsonLd = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'School',
+  name: 'U.E.P. Belén Sanjuán',
+  description:
+    'Unidad Educativa Privada en Caracas: maternal, primaria y secundaria. Educación integral desde 1989.',
+  foundingDate: '1989',
+  slogan: 'Cultivando mentes, cosechando futuros',
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Caracas',
+    addressCountry: 'VE',
+  },
+});
+---
+
+<html lang="es" class="lenis">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(og, Astro.site).href} />
+    <meta property="og:locale" content="es_VE" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-body" preload />
+    <script type="application/ld+json" set:html={jsonLd} />
+    <ClientRouter />
+  </head>
+  <body class="grain">
+    <noscript>
+      <style>
+        [data-reveal],
+        [data-reveal-clip],
+        [data-hero-crest],
+        [data-hero-kicker],
+        [data-hero-sub],
+        [data-hero-ctas],
+        .mask-line > span {
+          opacity: 1 !important;
+          transform: none !important;
+          clip-path: none !important;
+        }
+        [data-hero-rule],
+        [data-hero-line] {
+          transform: none !important;
+        }
+      </style>
+    </noscript>
+
+    <a href="#contenido" class="skip-link">Saltar al contenido</a>
+
+    <Nav base={base} pathname={Astro.url.pathname} tone={navTone} client:load transition:persist />
+
+    <ActaRail clauses={clauses} />
+
+    <main id="contenido">
+      <slot />
+    </main>
+
+    <Footer base={base} />
+
+    <script>
+      import '../scripts/animations';
+    </script>
+  </body>
+</html>

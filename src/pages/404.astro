@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+---
+
+<BaseLayout
+  title="Folio no encontrado | U.E.P. Belén Sanjuán"
+  description="La página que buscas no existe en este registro."
+  noindex
+>
+  <section class="flex min-h-[100svh] items-center justify-center bg-paper px-6 pt-20">
+    <div class="relative w-full max-w-[760px] border border-gold p-2">
+      <div class="border border-[#E2D5B8] px-8 py-16 text-center md:px-16 md:py-20">
+        <span class="kicker">REGISTRO · FOLIO 404</span>
+        <h1 class="mt-6 font-heading text-[clamp(3rem,9vw,6rem)] leading-none text-navy">
+          Folio no<br /><em>encontrado.</em>
+        </h1>
+        <p class="mx-auto mt-6 max-w-[42ch] text-[0.98rem] leading-[1.7] text-inkmuted">
+          Esta página no aparece en el acta. Puede que la dirección haya cambiado,
+          o que nunca haya existido.
+        </p>
+        <div class="mt-10 flex justify-center">
+          <a href={base} class="btn-primary">
+            VOLVER AL INICIO
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <path d="M2.5 8 H13.5 M9.5 4 L13.5 8 L9.5 12" stroke-linecap="round" stroke-linejoin="round"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

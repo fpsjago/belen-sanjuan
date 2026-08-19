@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero';
+import HomeCifras from '../components/HomeCifras';
+import HomeNiveles from '../components/HomeNiveles';
+import HomeProyecto from '../components/HomeProyecto';
+import HomeVida from '../components/HomeVida';
+import HomeDireccion from '../components/HomeDireccion';
+import HomeLegado from '../components/HomeLegado';
+import { optimized } from '../lib/images';
+import { WHATSAPP_HREF } from '../lib/site';
+import type { ClauseDef, NivelData } from '../types';
+
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+
+const nivelesRaw = await getCollection('niveles');
+const niveles: NivelData[] = nivelesRaw
+  .map((n) => ({ ...n.data, imagen: undefined, imagenPendiente: n.data.imagenPendiente }))
+  .sort((a, b) => a.orden - b.orden);
+
+const hitosRaw = await getCollection('hitos');
+const hitos = hitosRaw.map((h) => h.data).sort((a, b) => a.orden - b.orden);
+
+const [mundial, cancha, lapices, comunidad, virutas] = await Promise.all([
+  optimized('mundial.jpg', 'Estudiantes de todos los niveles reunidos en el Mundial Belén Sanjuán', 1000),
+  optimized('cancha.jpg', 'Estudiantes de secundaria en la cancha techada del colegio', 900),
+  optimized('lapices-warm.jpg', 'Detalle de lápices de colores en tonos cálidos', 900),
+  optimized('comunidad.jpg', 'Maestra y estudiante de maternal con el uniforme del colegio', 900),
+  optimized('lapices-virutas.jpg', 'Virutas de colores y lápices sobre la mesa de trabajo', 800),
+]);
+
+const clauses: ClauseDef[] = [
+  { numeral: 'I', id: 'niveles', label: 'Niveles' },
+  { numeral: 'II', id: 'proyecto', label: 'Proyecto educativo' },
+  { numeral: 'III', id: 'vida', label: 'Vida escolar' },
+  { numeral: 'IV', id: 'direccion', label: 'Dirección' },
+  { numeral: 'V', id: 'legado', label: 'Legado y admisión' },
+];
+---
+
+<BaseLayout
+  title="U.E.P. Belén Sanjuán — Maternal, Primaria y Secundaria en Caracas"
+  description="Colegio en Caracas con 37 años de educación integral: maternal, primaria y secundaria en un solo campus. Cultivando mentes, cosechando futuros desde 1989."
+  clauses={clauses}
+>
+  <Hero base={base} client:load />
+  <HomeCifras client:visible={{ rootMargin: '100000px 0px 200px 0px' }} />
+  <HomeNiveles base={base} niveles={niveles} client:visible={{ rootMargin: '100000px 0px 200px 0px' }} />
+  <HomeProyecto base={base} client:visible={{ rootMargin: '100000px 0px 200px 0px' }} />
+  <HomeVida
+    base={base}
+    mundial={mundial}
+    cancha={cancha}
+    lapices={lapices}
+    virutas={virutas}
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+  <HomeDireccion comunidad={comunidad} client:visible={{ rootMargin: '100000px 0px 200px 0px' }} />
+  <HomeLegado
+    base={base}
+    hitos={hitos}
+    whatsappHref={WHATSAPP_HREF}
+    client:visible={{ rootMargin: '100000px 0px 200px 0px' }}
+  />
+</BaseLayout>
