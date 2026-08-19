@@ -1,0 +1,14 @@
+# U.E.P. Belén Sanjuán
+
+> Unidad Educativa Privada en Caracas, Venezuela. Maternal, primaria y secundaria
+> en un solo campus. Fundada en 1989, en honor a la maestra Belén Sanjuán,
+> pionera de la educación integral venezolana. Lema: "Cultivando mentes,
+> cosechando futuros".
+
+## Páginas
+- [Inicio](/) — presentación, niveles, proyecto, vida escolar, legado y admisión
+- [Niveles](/niveles/) — maternal (1-5), primaria (6-11), secundaria (12-17)
+- [Admisiones](/admisiones/) — proceso, recaudos, fechas, preguntas frecuentes
+- [Vida escolar](/vida-escolar/) — deportes, fe, arte, obra social, Mundial BSJ
+- [Proyecto educativo](/proyecto-educativo/) — la educación integral
+- [Contacto](/contacto/) — WhatsApp, formulario, horario de atención

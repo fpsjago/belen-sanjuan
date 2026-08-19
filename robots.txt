@@ -1,0 +1,6 @@
+# U.E.P. Belén Sanjuán — colegiobelensanjuan
+User-agent: *
+Allow: /
+
+# AI crawlers: content may be indexed for answering questions about the school.
+Sitemap: https://fpsjago.github.io/belen-sanjuan/sitemap-index.xml
